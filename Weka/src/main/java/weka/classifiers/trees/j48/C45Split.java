@@ -312,7 +312,7 @@ public class C45Split
   /**
    * Returns (C4.5-type) information gain for the generated split.
    */
-  public final double infoGain() {
+  public  double infoGain() {
 
     return m_infoGain;
   }
