@@ -690,6 +690,62 @@ public class J48
   }
   
   /**
+ * @return the m_root
+ */
+protected ClassifierTree getM_root() {
+	return m_root;
+}
+
+/**
+ * @param m_root the m_root to set
+ */
+protected void setM_root(ClassifierTree m_root) {
+	this.m_root = m_root;
+}
+
+/**
+ * @return the m_CF
+ */
+protected float getM_CF() {
+	return m_CF;
+}
+
+/**
+ * @return the m_unpruned
+ */
+protected boolean isM_unpruned() {
+	return m_unpruned;
+}
+
+/**
+ * @return the m_numFolds
+ */
+protected int getM_numFolds() {
+	return m_numFolds;
+}
+
+/**
+ * @return the m_subtreeRaising
+ */
+protected boolean isM_subtreeRaising() {
+	return m_subtreeRaising;
+}
+
+/**
+ * @return the m_noCleanup
+ */
+protected boolean isM_noCleanup() {
+	return m_noCleanup;
+}
+
+/**
+ * @return the m_Seed
+ */
+protected int getM_Seed() {
+	return m_Seed;
+}
+
+/**
    * Returns the tip text for this property
    * @return tip text for this property suitable for
    * displaying in the explorer/experimenter gui
