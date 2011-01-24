@@ -48,6 +48,20 @@ public class C45ModelSelection
   private Instances m_allData; // 
 
   /**
+ * @return the m_minNoObj
+ */
+protected int getM_minNoObj() {
+	return m_minNoObj;
+}
+
+/**
+ * @return the m_allData
+ */
+protected Instances getM_allData() {
+	return m_allData;
+}
+
+/**
    * Initializes the split selection method with the given parameters.
    *
    * @param minNoObj minimum number of instances that have to occur in at least two
@@ -71,7 +85,7 @@ public class C45ModelSelection
   /**
    * Selects C4.5-type split for the given dataset.
    */
-  public final ClassifierSplitModel selectModel(Instances data){
+  public  ClassifierSplitModel selectModel(Instances data){
 
     double minResult;
     double currentResult;
