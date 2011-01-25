@@ -97,7 +97,7 @@ public class NanniInfoGain extends J48 {
 	
 	/**
 	 * A string containing the user weights, the user weights must be in the same number
-	 * as the data attributes and separated by ','. The weights must be in the range 0..1
+	 * as the data attributes and separated by ';'. The weights must be in the range 0..1
 	 * If the weights are less than the attributes, the remaining attributes have weight 1
 	 * If the weights are more than the attributes, the exceeding weights are ignored.
 	 */
@@ -140,7 +140,7 @@ public class NanniInfoGain extends J48 {
 	   * Valid options are: <p>
 	   * 
 	   * -W weights <br>
-	   * The list of user weights, one for attribure, separated by ','
+	   * The list of user weights, one for attribure, separated by ';'
 	   * the weights must be in the range 0..1 <p> 
 	   *
 	   * -U <br>
@@ -181,7 +181,7 @@ public class NanniInfoGain extends J48 {
 	    Vector newVector = new Vector(10);
 	    
 	    newVector.
-		addElement(new Option("\t The list of user weights, one for attribure, separated by ',' \n" +
+		addElement(new Option("\t The list of user weights, one for attribure, separated by ';' \n" +
 				      "\t the weights must be in the range 0..1",
 				      "W", 1, "-W <list of weights>"));
 
@@ -249,7 +249,7 @@ public class NanniInfoGain extends J48 {
 	   *  Use unpruned tree.</pre>
 	   * 
 	   * <pre> -W user weights;
-	   *  The list of user weights, one for attribure, separated by ','
+	   *  The list of user weights, one for attribure, separated by ';'
 	   *  the weights must be in the range 0..1</pre>
 	   * 
 	   * <pre> -C &lt;pruning confidence&gt;
@@ -301,7 +301,7 @@ public class NanniInfoGain extends J48 {
 	   */
 	public String userWeightsTipText(){
 		return "  A string containing the user weights, the user weights must be in the same number" +
-				"  as the data attributes and separated by ','. The weights must be in the range 0..1" +
+				"  as the data attributes and separated by ';'. The weights must be in the range 0..1" +
 				"  If the weights are less than the attributes, the remaining attributes have weight 1" +
 				"  If the weights are more than the attributes, the exceeding weights are ignored.";
 	}
@@ -324,7 +324,7 @@ public class NanniInfoGain extends J48 {
 	
 	/**
 	 * parses a string containing the user weights, the user weights must be in the same number
-	 * as the data attributes and separated by ','. The weights must be in the range 0..1
+	 * as the data attributes and separated by ';'. The weights must be in the range 0..1
 	 * If the weights are less than the attributes, the remaining attributes have weight 1
 	 * If the weights are more than the attributes, the exceeding weights are ignored.
 	 * 
@@ -335,12 +335,12 @@ public class NanniInfoGain extends J48 {
 	 */
 	private double [] parseWeights(String stringWeights, int numberOfAttributes) throws Exception{
 		double [] result = new double [numberOfAttributes];
-		StringTokenizer st = new StringTokenizer(stringWeights,",");
+		StringTokenizer st = new StringTokenizer(stringWeights,";");
 		for (int k = 0; k <result.length ; k++) {
 			if (st.hasMoreTokens()){
 				double current = Double.parseDouble(st.nextToken().trim());
-				if (current<=0 || current >=1)
-					throw new Exception("The value "+current+" of the weight is not valid, munt be in the range 0..1");
+				if (current<0 || current >1)
+					throw new Exception("The value "+current+" of the weight is not valid, must be in the range 0..1");
 				result[k]= current;
 			}
 			else
@@ -349,5 +349,12 @@ public class NanniInfoGain extends J48 {
 		
 		return result;
 	}
-
+	/**
+	   * Main method for testing this class
+	   *
+	   * @param argv the commandline options
+	   */
+	  public static void main(String [] argv){
+	    runClassifier(new NanniInfoGain(), argv);
+	  }
 }
