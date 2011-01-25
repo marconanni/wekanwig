@@ -53,7 +53,7 @@ public class NIGSplit extends C45Split {
 	 * 
 	 */
 	public static boolean checkUserWeight(double userWeight){
-		return (userWeight<=0 && userWeight >=1);
+		return (userWeight>=0 && userWeight <=1);
 	}
 
 	
