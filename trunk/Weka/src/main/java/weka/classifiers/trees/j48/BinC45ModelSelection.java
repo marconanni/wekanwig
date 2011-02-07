@@ -71,7 +71,7 @@ public class BinC45ModelSelection
   /**
    * Selects C4.5-type split for the given dataset.
    */
-  public final ClassifierSplitModel selectModel(Instances data){
+  public  ClassifierSplitModel selectModel(Instances data){
 
     double minResult;
     double currentResult;
@@ -175,6 +175,20 @@ public class BinC45ModelSelection
   }
 
   /**
+ * @return the m_minNoObj
+ */
+protected int getM_minNoObj() {
+	return m_minNoObj;
+}
+
+/**
+ * @return the m_allData
+ */
+protected Instances getM_allData() {
+	return m_allData;
+}
+
+/**
    * Selects C4.5-type split for the given dataset.
    */
   public final ClassifierSplitModel selectModel(Instances train, Instances test) {

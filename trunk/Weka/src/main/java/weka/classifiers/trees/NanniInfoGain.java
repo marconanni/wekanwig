@@ -10,10 +10,14 @@ import weka.classifiers.trees.j48.C45ModelSelection;
 import weka.classifiers.trees.j48.C45PruneableClassifierTree;
 import weka.classifiers.trees.j48.ModelSelection;
 import weka.classifiers.trees.j48.PruneableClassifierTree;
+import weka.classifiers.trees.nig.BinNIGModelSelection;
 import weka.classifiers.trees.nig.NIGModelSelection;
 import weka.core.Instances;
 import weka.core.Option;
+import weka.core.TechnicalInformation;
 import weka.core.Utils;
+import weka.core.TechnicalInformation.Field;
+import weka.core.TechnicalInformation.Type;
 
 
 /**
@@ -22,7 +26,7 @@ import weka.core.Utils;
 * It is an extension of C4.5
 *  For more information about c45, see<br/>
 * <br/>
-* Ross Quinlan (1993). C4.5: Programs for Machine Learning. Morgan Kaufmann Publishers, San Mateo, CA.
+* Marco Nanni (2011). Il gudagno informativo negli alberi decisionali: un nuovo approccio
 * <p/>
 <!-- globalinfo-end -->
 *
@@ -104,6 +108,37 @@ public class NanniInfoGain extends J48 {
 	private String userWeights = "1";
 	
 	/**
+	   * Returns a string describing classifier
+	   * @return a description suitable for
+	   * displaying in the explorer/experimenter gui
+	   */
+	  public String globalInfo() {
+
+	    return  "Class for generating a pruned or unpruned Nanni Info Gain decision tree."+
+	    " It is an extension of C4.5 For more informationa see \n\n"+
+	    getTechnicalInformation().toString();
+	  }
+
+	  /**
+	   * Returns an instance of a TechnicalInformation object, containing 
+	   * detailed information about the technical background of this class,
+	   * e.g., paper reference or book this class is based on.
+	   * 
+	   * @return the technical information about this class
+	   */
+	  public TechnicalInformation getTechnicalInformation() {
+	    TechnicalInformation 	result;
+	    
+	    result = new TechnicalInformation(Type.UNPUBLISHED);
+	    result.setValue(Field.AUTHOR, "Marco Nanni");
+	    result.setValue(Field.YEAR, "2011");
+	    result.setValue(Field.TITLE, "Il guadagno informativo negli alberi decisionali: un nuovo approccio");
+	    
+	    
+	    return result;
+	  }
+	
+	/**
 	   * Generates the classifier.
 	   *
 	   * @param instances the data to train the classifier with
@@ -117,7 +152,7 @@ public class NanniInfoGain extends J48 {
 	    this.numericUserWeigts = this.parseWeights(userWeights, instances.numAttributes());
 
 	    if (super.getBinarySplits())
-	      modSelection = new BinC45ModelSelection(super.getMinNumObj(), instances);
+	      modSelection = new BinNIGModelSelection(super.getMinNumObj(), instances,numericUserWeigts);
 	    else
 	      modSelection = new NIGModelSelection(super.getMinNumObj(), instances,numericUserWeigts);
 	    if (!getReducedErrorPruning())
@@ -349,6 +384,8 @@ public class NanniInfoGain extends J48 {
 		
 		return result;
 	}
+	
+	
 	/**
 	   * Main method for testing this class
 	   *
@@ -357,4 +394,6 @@ public class NanniInfoGain extends J48 {
 	  public static void main(String [] argv){
 	    runClassifier(new NanniInfoGain(), argv);
 	  }
+	  
+	  
 }
